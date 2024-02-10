@@ -4,9 +4,11 @@ const mongoose = require("mongoose")
 const bookmeet = require("./models/bookmeet.model")
 const feedback = require("./models/feedback.model")
 
+require("dotenv").config()
 
 const app = express()
-mongoose.connect("mongodb://127.0.0.1:27017/techy")
+
+mongoose.connect(process.env.MONGODB_URI)
 
 app.use(cors())
 app.use(express.json())
@@ -41,6 +43,6 @@ app.post('/api/feedback',async(req,res)=>{
 
 })
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT || 3000,()=>{
     console.log("Server started...")
 })
